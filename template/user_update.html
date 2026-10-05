@@ -1,0 +1,272 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Update User</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 20px;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 450px;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .gender-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .gender-option {
+            flex: 1;
+        }
+
+        .gender-option input {
+            display: none;
+        }
+
+        .gender-option label {
+            text-align: center;
+            padding: 11px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: normal;
+        }
+
+        .gender-option input:checked + label {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .update-btn {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #667eea;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .update-btn:hover {
+            background: #5568d8;
+        }
+
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="form-container">
+
+    <h1>Update User</h1>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div class="form-group">
+
+            <label for="name">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                value="{{ user.name }}"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="email">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                value="{{ user.email }}"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="phone">
+                Phone Number
+            </label>
+
+            <input
+                type="text"
+                id="phone"
+                name="phone"
+                value="{{ user.phone }}"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Gender
+            </label>
+
+            <div class="gender-options">
+
+                <div class="gender-option">
+
+                    <input
+                        type="radio"
+                        id="male"
+                        name="gender"
+                        value="male"
+                        {% if user.gender == 'male' %}
+                            checked
+                        {% endif %}
+                    >
+
+                    <label for="male">
+                        Male
+                    </label>
+
+                </div>
+
+
+                <div class="gender-option">
+
+                    <input
+                        type="radio"
+                        id="female"
+                        name="gender"
+                        value="female"
+                        {% if user.gender == 'female' %}
+                            checked
+                        {% endif %}
+                    >
+
+                    <label for="female">
+                        Female
+                    </label>
+
+                </div>
+
+
+                <div class="gender-option">
+
+                    <input
+                        type="radio"
+                        id="other"
+                        name="gender"
+                        value="other"
+                        {% if user.gender == 'other' %}
+                            checked
+                        {% endif %}
+                    >
+
+                    <label for="other">
+                        Other
+                    </label>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="update-btn">
+            Update User
+        </button>
+
+    </form>
+
+
+    <a
+        href="{% url 'user_list' %}"
+        class="back-btn">
+        ← Back to Users
+    </a>
+
+</div>
+
+</body>
+
+</html>
+```
